@@ -1,6 +1,6 @@
 {
     "name": "tom-pickering/craft-matrix-extensions",
-    "description": "Some handy little extensions for your Matrix blocks.",
+    "description": "Some handy little extensions for your Matrix blocks. e.g. Copy Block ID.",
     "type": "craft-plugin",
     "license": "proprietary",
     "support": {
