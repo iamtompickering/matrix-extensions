@@ -32,6 +32,10 @@ Craft.MatrixExtension.Init = Garnish.Base.extend({
                         continue;
                     }
 
+                    // Collapse all matrix blocks
+                    $matrixBlock.addClass('init-collapsed');
+                    this.collapseBlocks();
+
                     // Create a new class for this specific Matrix field and block
                     this.extensionMenus.push(new Craft.MatrixExtension.Menu($matrixField, $matrixBlock, $matrixBlocks));
                 }
@@ -41,6 +45,22 @@ Craft.MatrixExtension.Init = Garnish.Base.extend({
             Garnish.on(Craft.MatrixInput, 'blockAdded', $.proxy(this, 'blockAdded'));
 
         }, this));
+
+    },
+
+    collapseBlocks: function() {
+              
+        $('.matrixblock').each(function() {
+
+            var $matrixblock = $(this),
+                $actionMenu = $matrixblock.data('block').$actionMenu,
+                $collapseLink = $('a[data-action="collapse"]', $actionMenu);
+
+            $collapseLink.click();
+            $matrixblock.removeClass('init-collapsed');
+            
+        });
+    
 
     },
 
@@ -93,13 +113,20 @@ Craft.MatrixExtension.Menu = Garnish.Base.extend({
         var $deleteOption = this.blockInstance.$actionMenu.find('a[data-action="delete"]').parents('li');
 
         // Create our buttons
-        this.$idBtn = $('<a data-icon="clipboard" data-action="clipboard">' + Craft.t('app', `Copy Block ID: #${id}` ) + '</a>');
+        this.$copyIdBtn = $('<a data-icon="clipboard" data-action="copy-id">' + Craft.t('app', `Copy Block ID: #${id}` ) + '</a>');
+        this.$collapseAllBtn = $('<a data-icon="collapse" data-action="collapse-all">' + Craft.t('app', 'Collapse All Blocks' ) + '</a>');
+        this.$expandAllBtn = $('<a data-icon="expand" data-action="expand-all">' + Craft.t('app', 'Expand All Blocks' ) + '</a>');
 
-        // Add new menu items to the DOM
-        this.$idBtn.insertBefore($deleteOption).wrap('<li/>');
+        // Add new menu items to the DOM        
+        this.$collapseAllBtn.insertBefore($deleteOption).wrap('<li/>');
+        this.$expandAllBtn.insertBefore($deleteOption).wrap('<li/>');
+        $('<hr class="padded">').insertBefore($deleteOption);
+        this.$copyIdBtn.insertBefore($deleteOption).wrap('<li/>');
         $('<hr class="padded">').insertBefore($deleteOption);
 
-        this.addListener(this.$idBtn, 'click', this.handleClick);
+        this.addListener(this.$copyIdBtn, 'click', this.handleClick);
+        this.addListener(this.$collapseAllBtn, 'click', this.handleClick);
+        this.addListener(this.$expandAllBtn, 'click', this.handleClick);
 
     },
 
@@ -111,11 +138,50 @@ Craft.MatrixExtension.Menu = Garnish.Base.extend({
             return;
         }
 
-        if ($option.data('action') == 'clipboard') {
+        if ($option.data('action') == 'copy-id') {
             this.copyToClipboard(e);
         }
 
+        if ($option.data('action') == 'collapse-all') {
+            this.collapseAll(e);
+        }
+
+        if ($option.data('action') == 'expand-all') {
+            this.expandAll(e);
+        }
+
         this.blockInstance.actionDisclosure.hide();
+
+    },
+
+    collapseAll: function(e) {
+
+        $('.matrixblock').each(function() {
+
+            var $matrixBlock = $(this),
+                $actionMenu = $matrixBlock.data('block').$actionMenu,
+                $collapseLink = $('a[data-action="collapse"]', $actionMenu);
+
+            $collapseLink.click();
+            $matrixBlock.addClass('collapsed');
+
+            
+        });
+
+    },
+
+    expandAll: function(e) {
+
+        $('.matrixblock').each(function() {
+
+            var $matrixBlock = $(this),
+                $actionMenu = $matrixBlock.data('block').$actionMenu,
+                $expandLink = $('a[data-action="expand"]', $actionMenu);
+
+            $expandLink.click();
+            $matrixBlock.removeClass('collapsed');
+            
+        });
 
     },
 

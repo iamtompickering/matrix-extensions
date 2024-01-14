@@ -23,4 +23,8 @@ class MatrixExtension extends AssetBundle
         'script.js',
     ];
 
+    public $css = [
+        'style.css',
+    ];
+
 }

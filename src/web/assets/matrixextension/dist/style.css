@@ -1,0 +1,9 @@
+.matrixblock.init-collapsed {
+    height: 32px !important; box-sizing: border-box; overflow: hidden;
+}
+.matrixblock .titlebar { 
+    cursor: pointer; 
+}
+.matrixblock .titlebar .preview { 
+    display: none !important; 
+}
