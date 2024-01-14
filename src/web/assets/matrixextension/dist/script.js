@@ -156,7 +156,7 @@ Craft.MatrixExtension.Menu = Garnish.Base.extend({
 
     collapseAll: function(e) {
 
-        $('.matrixblock').each(function() {
+        $(`#${this.$matrixField[0].id} .matrixblock`).each(function() {
 
             var $matrixBlock = $(this),
                 $actionMenu = $matrixBlock.data('block').$actionMenu,
@@ -172,7 +172,7 @@ Craft.MatrixExtension.Menu = Garnish.Base.extend({
 
     expandAll: function(e) {
 
-        $('.matrixblock').each(function() {
+        $(`#${this.$matrixField[0].id} .matrixblock`).each(function() {
 
             var $matrixBlock = $(this),
                 $actionMenu = $matrixBlock.data('block').$actionMenu,
