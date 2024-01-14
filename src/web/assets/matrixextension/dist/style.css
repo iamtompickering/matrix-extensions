@@ -3,6 +3,10 @@
 }
 .matrixblock .titlebar { 
     cursor: pointer; 
+    transition: background 0.2s ease-in-out;
+}
+.matrixblock.collapsed .titlebar:hover {
+    background: #e2ebf5;
 }
 .matrixblock .titlebar .preview { 
     display: none !important; 
