@@ -5,6 +5,8 @@ namespace tompickering\craftmatrixextensions;
 use Craft;
 use craft\base\Plugin;
 
+use tompickering\craftmatrixextensions\web\assets\matrixextension\MatrixExtension;
+
 /**
  * Matrix Extensions plugin
  *
@@ -32,8 +34,17 @@ class MatrixExtensions extends Plugin
 
         // Defer most setup tasks until Craft is fully initialized
         Craft::$app->onInit(function() {
+
             $this->attachEventHandlers();
-            // ...
+            
+            if (!Craft::$app->getRequest()->getIsCpRequest() || Craft::$app->getRequest()->getAcceptsJson()) {
+                return;
+            }
+        
+            $view = Craft::$app->getView();
+            $view->registerAssetBundle(MatrixExtension::class);
+            $view->registerJs('new Craft.MatrixExtension.Init();');
+
         });
     }
 
