@@ -1,6 +1,6 @@
 # Matrix Extensions
 
-Some handy little extensions for your Matrix blocks. e.g. Copy Block ID.
+Some handy little extensions for your Matrix blocks. e.g. Copy Block ID, collapse / expand all blocks, collapsed view on page load.
 
 ## Requirements
 
