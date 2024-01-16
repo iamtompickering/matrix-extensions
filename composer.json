@@ -3,7 +3,7 @@
     "description": "Some handy little extensions for your Matrix blocks. e.g. Copy Block ID.",
     "type": "craft-plugin",
     "license": "proprietary",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "support": {
         "email": "iamtompickering@gmail.com",
         "issues": "https://github.com/iamtompickering/matrix-extensions/issues?state=open",
