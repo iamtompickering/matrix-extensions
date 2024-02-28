@@ -33,8 +33,8 @@ Craft.MatrixExtension.Init = Garnish.Base.extend({
                     }
 
                     // Collapse all matrix blocks
-                    $matrixBlock.addClass('init-collapsed');
-                    this.collapseBlocks();
+                    // $matrixBlock.addClass('init-collapsed');
+                    // this.collapseBlocks();
 
                     // Create a new class for this specific Matrix field and block
                     this.extensionMenus.push(new Craft.MatrixExtension.Menu($matrixField, $matrixBlock, $matrixBlocks));
